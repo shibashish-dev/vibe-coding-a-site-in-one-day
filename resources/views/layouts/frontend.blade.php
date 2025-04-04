@@ -17,42 +17,20 @@
     <!-- Header -->
     <header class="bg-white shadow">
         <!-- Top Blue Bar -->
-        {{-- <div class="bg-blue-700 text-white text-sm py-2 px-6 flex justify-between items-center">
-            <!-- Left: Text Size Controls -->
-            <div class="flex items-center space-x-2">
-                <span>Text Size</span>
-                <button onclick="setFontSize('normal')"
-                    class="px-2 py-1 bg-white text-blue-700 rounded hover:bg-gray-200">A</button>
-                <button onclick="setFontSize('increase')"
-                    class="px-2 py-1 bg-white text-blue-700 rounded hover:bg-gray-200">A<sup>+</sup></button>
-                <button onclick="setFontSize('decrease')"
-                    class="px-2 py-1 bg-white text-blue-700 rounded hover:bg-gray-200">A<sup>-</sup></button>
-            </div>
-
-            <!-- Right: Theme & Language -->
-            <div class="flex items-center space-x-2">
-                <a href="#main-content" class="hover:underline">Skip to main content</a>
-                <div class="flex space-x-1">
-                    <button onclick="changeTheme('white')" class="w-5 h-5 bg-white rounded hover:opacity-80"></button>
-                    <button onclick="changeTheme('blue')" class="w-5 h-5 bg-blue-900 rounded hover:opacity-80"></button>
-                    <button onclick="changeTheme('orange')"
-                        class="w-5 h-5 bg-orange-500 rounded hover:opacity-80"></button>
-                    <button onclick="changeTheme('green')"
-                        class="w-5 h-5 bg-green-500 rounded hover:opacity-80"></button>
-                </div>
-                <a href="/hi" class="hover:underline">हिन्दी</a>
-            </div>
-        </div> --}}
-
         <div class="w-full mx-auto flex flex-wrap items-center px-4 py-4">
             <!-- Left Section: HWB Logo & Text -->
             <div class="flex items-center space-x-6 flex-1">
                 <div class="flex-shrink-0 relative group">
-                    <img src="{{ asset('logo.png') }}" alt="HWB Logo" class="w-24 h-24 object-contain transition-transform duration-300 group-hover:scale-105">
-                    <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-20 bg-blue-400 blur-md transition-opacity duration-500 -z-10"></div>
+                    <img src="{{ asset('logo.png') }}" alt="HWB Logo"
+                        class="w-24 h-24 object-contain transition-transform duration-300 group-hover:scale-105">
+                    <div
+                        class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-20 bg-blue-400 blur-md transition-opacity duration-500 -z-10">
+                    </div>
                 </div>
                 <div class="flex flex-col justify-center">
-                    <h1 class="text-xl font-bold tracking-wide mb-1 bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent">Government of India</h1>
+                    <h1
+                        class="text-xl font-bold tracking-wide mb-1 bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent">
+                        Government of India</h1>
                     <h2 class="text-lg text-blue-600 font-medium mb-1.5">Department of Atomic Energy</h2>
                     <h3 class="text-xl font-bold text-blue-900 leading-tight">Heavy Water Board Facilities, Talcher</h3>
                 </div>
@@ -82,10 +60,13 @@
                 <div class="relative w-80 group">
                     <input type="text" name="search" placeholder="Search..."
                         class="w-full px-5 py-2.5 border border-blue-200 rounded-full shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-400 focus:outline-none transition-all duration-300 group-hover:shadow-md pl-12 bg-gradient-to-r from-white to-blue-50">
-                    <button type="submit" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-600 group-hover:text-blue-800 transition-colors duration-200">
+                    <button type="submit"
+                        class="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-600 group-hover:text-blue-800 transition-colors duration-200">
                         <i class="fas fa-search"></i>
                     </button>
-                    <div class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-blue-50 to-transparent blur-lg transition-opacity duration-1000 -z-10"></div>
+                    <div
+                        class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-gradient-to-r from-transparent via-blue-50 to-transparent blur-lg transition-opacity duration-1000 -z-10">
+                    </div>
                 </div>
             </div>
         </div>
