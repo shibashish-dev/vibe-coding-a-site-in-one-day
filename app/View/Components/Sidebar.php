@@ -21,6 +21,25 @@ class Sidebar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.sidebar');
+        $menuItems = [
+            ['name' => 'Zimbra', 'href' => '#zimbra', 'icon' => 'fa-solid fa-envelope'],
+            ['name' => 'e-Office', 'href' => '#e-office', 'icon' => 'fa-solid fa-building'],
+            ['name' => 'Integrated Info System', 'href' => '#iis', 'icon' => 'fa-solid fa-network-wired'],
+            ['name' => 'Attendance', 'href' => '#attendance', 'icon' => 'fa-solid fa-user-check'],
+            ['name' => 'Procurement', 'href' => '#procurement', 'icon' => 'fa-solid fa-shopping-cart'],
+            ['name' => 'Forms & Formats', 'href' => '#forms-formats', 'icon' => 'fa-solid fa-file-contract'],
+            ['name' => 'VMS', 'href' => '#vms', 'icon' => 'fa-solid fa-shield-alt'],
+            ['name' => 'HIMS', 'href' => '#hims', 'icon' => 'fa-solid fa-hospital'],
+            ['name' => 'Photo Gallery', 'href' => '#photo-gallery', 'icon' => 'fa-solid fa-images'],
+            ['name' => 'Canteen Info', 'href' => '#canteen-info', 'icon' => 'fa-solid fa-utensils'],
+            ['name' => 'Vehicle', 'href' => '#vehicle', 'icon' => 'fa-solid fa-car'],
+        ];
+
+        $links = [
+            ['name' => 'Google', 'href' => 'https://www.google.com', 'icon' => 'fa-brands fa-google'],
+            ['name' => 'HWB', 'href' => 'https://www.hwb.gov.in', 'icon' => 'fa-solid fa-atom'],
+            ['name' => 'HWB Intranet', 'href' => '#hwb-intranet', 'icon' => 'fa-solid fa-network-wired'],
+        ];
+        return view('components.sidebar', compact('menuItems', 'links'));
     }
 }
