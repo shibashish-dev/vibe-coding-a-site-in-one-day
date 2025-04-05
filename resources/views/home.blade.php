@@ -16,14 +16,14 @@
                     <x-circulars />
                 </div>
                 <div class="w-1/2">
-                    <x-quick-info />
+                    <x-quick-infos />
                 </div>
             </div>
         </div>
 
         <!-- What's New -->
         <div class="col-span-3">
-            <x-whats-new />
+            <x-whats-news />
         </div>
     </div>
 </x-frontend>

@@ -1,9 +1,9 @@
 <x-layouts.app>
     <div class="p-6">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-semibold">Circulars</h2>
-            <a href="{{ route('circulars.create') }}">
-                <flux:button size="sm" color="primary">+ New Circular</flux:button>
+            <h2 class="text-2xl font-semibold">What's New</h2>
+            <a href="{{ route('whats_new.create') }}">
+                <flux:button size="sm" color="primary">+ New Item</flux:button>
             </a>
         </div>
 
@@ -18,7 +18,7 @@
                     class="text-sm border-zinc-300 dark:bg-zinc-800 dark:border-zinc-600 rounded">
                     <option value="created_at" {{ request('sort') == 'created_at' ? 'selected' : '' }}>Date</option>
                     <option value="title" {{ request('sort') == 'title' ? 'selected' : '' }}>Title</option>
-                    <option value="type" {{ request('sort') == 'type' ? 'selected' : '' }}>Type</option>
+                    <option value="category" {{ request('sort') == 'category' ? 'selected' : '' }}>Category</option>
                 </select>
 
                 <select name="direction" class="text-sm border-zinc-300 dark:bg-zinc-800 dark:border-zinc-600 rounded">
@@ -35,33 +35,22 @@
                 <thead class="bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 text-left">
                     <tr class="border-b border-zinc-200 dark:border-zinc-700">
                         <th class="px-4 py-3">Title</th>
-                        <th class="px-4 py-3">Type</th>
-                        <th class="px-4 py-3">Created</th>
-                        <th class="px-4 py-3">Action</th>
+                        <th class="px-4 py-3">Category</th>
+                        <th class="px-4 py-3">On Date</th>
+                        <th class="px-4 py-3">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="text-zinc-700 dark:text-zinc-200">
-                    @forelse ($circulars as $circular)
+                    @forelse ($whatsNew as $item)
                         <tr class="border-b border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800">
-                            <td class="px-4 py-3">{{ $circular->title }}</td>
-                            <td class="px-4 py-3 capitalize">{{ $circular->type }}</td>
-                            <td class="px-4 py-3">{{ $circular->created_at->format('M d, Y') }}</td>
+                            <td class="px-4 py-3">{{ $item->title }}</td>
+                            <td class="px-4 py-3 capitalize">{{ $item->category }}</td>
+                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($item->on_date)->format('M d, Y') }}</td>
                             <td class="px-4 py-3 flex gap-2 items-center">
-                                @if ($circular->type === 'link')
-                                    <a href="{{ $circular->link }}" target="_blank">
-                                        <flux:button size="xs" color="secondary">Open Link</flux:button>
-                                    </a>
-                                @else
-                                    <a href="{{ asset('storage/' . $circular->pdf_path) }}" target="_blank">
-                                        <flux:button size="xs" color="secondary">View PDF</flux:button>
-                                    </a>
-                                @endif
-
-                                <a href="{{ route('circulars.edit', $circular) }}">
+                                <a href="{{ route('whats_new.edit', $item) }}">
                                     <flux:button size="xs" color="neutral">Edit</flux:button>
                                 </a>
-
-                                <form action="{{ route('circulars.destroy', $circular) }}" method="POST"
+                                <form action="{{ route('whats_new.destroy', $item) }}" method="POST"
                                     onsubmit="return confirm('Are you sure?')">
                                     @csrf
                                     @method('DELETE')
@@ -71,7 +60,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-4 py-6 text-center text-zinc-500">No circulars found.</td>
+                            <td colspan="4" class="px-4 py-6 text-center text-zinc-500">No items found.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -79,7 +68,7 @@
         </div>
 
         <div class="mt-4">
-            {{ $circulars->links() }}
+            {{ $whatsNew->links() }}
         </div>
     </div>
 </x-layouts.app>

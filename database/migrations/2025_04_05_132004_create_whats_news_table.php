@@ -10,12 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('circulars', function (Blueprint $table) {
+        Schema::create('whats_new', function (Blueprint $table) {
             $table->id();
             $table->longText('title');
-            $table->enum('type', ['pdf', 'link']);
-            $table->text('link')->nullable();
-            $table->string('pdf_path')->nullable();
+            $table->date('on_date');
+            $table->string('category');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('circulars');
+        Schema::dropIfExists('whats_new');
     }
 };

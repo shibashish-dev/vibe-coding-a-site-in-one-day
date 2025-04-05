@@ -4,102 +4,96 @@ namespace App\Http\Controllers;
 
 use App\Models\Circular;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CircularController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $circulars = Circular::all();
+        $query = Circular::query();
+
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
+
+        $sortField = $request->get('sort', 'created_at');
+        $sortDirection = $request->get('direction', 'desc');
+
+        $circulars = $query->orderBy($sortField, $sortDirection)->paginate(10)->appends($request->query());
+
         return view('circulars.index', compact('circulars'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('circulars.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'type' => 'required',
-            'link' => 'required|url',
-            'pdf_path' => 'required|mimes:pdf|max:10240',
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'type' => 'required|in:pdf,link',
+            'link' => 'required_if:type,link|nullable|url',
+            'pdf' => 'required_if:type,pdf|nullable|mimes:pdf|max:2048',
         ]);
 
-        $path = $request->file('pdf_path')->store('pdfs', 'public');
+        $data = [
+            'title' => $validated['title'],
+            'type' => $validated['type'],
+            'link' => $validated['link'] ?? null,
+        ];
 
-        Circular::create([
-            'title' => $request->title,
-            'type' => $request->type,
-            'link' => $request->link,
-            'pdf_path' => $path,
-        ]);
+        if ($request->file('pdf')) {
+            $path = $request->file('pdf')->store('pdfs', 'public');
+            $data['pdf_path'] = $path;
+        }
 
-        return redirect()->route('circulars.index');
+        Circular::create($data);
+
+        return redirect()->route('circulars.index')->with('success', 'Circular created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    public function edit(Circular $circular)
     {
-        // $circular = Circular::findOrFail($id);
-        // return view('circulars.show', compact('circular'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-        $circular = Circular::findOrFail($id);
         return view('circulars.edit', compact('circular'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Circular $circular)
     {
-        $request->validate([
-            'title' => 'required',
-            'type' => 'required',
-            'link' => 'required|url',
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'type' => 'required|in:pdf,link',
+            'link' => 'required_if:type,link|nullable|url',
+            'pdf' => 'nullable|mimes:pdf|max:2048',
         ]);
 
-        $circular = Circular::findOrFail($id);
+        $data = [
+            'title' => $validated['title'],
+            'type' => $validated['type'],
+            'link' => $validated['link'] ?? null,
+        ];
 
-        $circular->update([
-            'title' => $request->title,
-            'type' => $request->type,
-            'link' => $request->link,
-        ]);
-
-        if ($request->hasFile('pdf_path')) {
-            $path = $request->file('pdf_path')->store('pdfs', 'public');
-            $circular->update(['pdf_path' => $path]);
+        if ($request->file('pdf')) {
+            if ($circular->pdf_path) {
+                Storage::disk('public')->delete($circular->pdf_path);
+            }
+            $data['pdf_path'] = $request->file('pdf')->store('pdfs', 'public');
         }
 
-        return redirect()->route('circulars.index');
+        $circular->update($data);
+
+        return redirect()->route('circulars.index')->with('success', 'Circular updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
+    public function destroy(Circular $circular)
     {
-        $circular = Circular::findOrFail($id);
+        if ($circular->pdf_path) {
+            Storage::disk('public')->delete($circular->pdf_path);
+        }
+
         $circular->delete();
-        return redirect()->route('circulars.index');
+        return redirect()->route('circulars.index')->with('success', 'Circular deleted.');
     }
 }

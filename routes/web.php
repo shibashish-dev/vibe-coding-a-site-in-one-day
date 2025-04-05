@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\WhatsNewController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CircularController;
+use App\Http\Controllers\QuickInfoController;
 
 Route::get('/', function () {
     return view('home');
@@ -23,8 +25,12 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Circulars
-
 Route::resource('circulars', CircularController::class);
 
+//Quick Info
+Route::resource('quick_infos', QuickInfoController::class);
+
+//What's New
+Route::resource('whats_new', WhatsNewController::class);
 
 require __DIR__ . '/auth.php';
