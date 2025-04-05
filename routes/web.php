@@ -4,6 +4,7 @@ use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CircularController;
 
 Route::get('/', function () {
     return view('home');
@@ -21,4 +22,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
-require __DIR__.'/auth.php';
+//Circulars
+
+Route::resource('circulars', CircularController::class);
+
+
+require __DIR__ . '/auth.php';
