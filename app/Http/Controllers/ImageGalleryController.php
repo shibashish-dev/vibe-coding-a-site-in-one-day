@@ -101,4 +101,12 @@ class ImageGalleryController extends Controller
 
         return redirect()->route('image_galleries.index')->with('success', 'Image deleted successfully.');
     }
+    /**
+     * Show the image.
+     */
+    public function view()
+    {
+        $imageGalleries = ImageGallery::paginate(8);
+        return view('image_galleries.view', compact('imageGalleries'));
+    }
 }

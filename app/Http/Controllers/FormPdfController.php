@@ -90,4 +90,15 @@ class FormPdfController extends Controller
         $formPdf->delete();
         return redirect()->route('form_pdfs.index')->with('success', 'Form PDF deleted successfully.');
     }
+
+    public function view(Request $request)
+    {
+        $search = $request->input('search');
+
+        $formPdfs = FormPdf::when($search, function ($query, $search) {
+            return $query->where('title', 'like', '%' . $search . '%');
+        })->paginate(8);
+
+        return view('form_pdfs.view', compact('formPdfs'));
+    }
 }

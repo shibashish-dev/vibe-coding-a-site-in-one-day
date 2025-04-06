@@ -27,10 +27,10 @@ class Sidebar extends Component
             ['name' => 'Integrated Info System', 'href' => '#iis', 'icon' => 'fa-solid fa-network-wired'],
             ['name' => 'Attendance', 'href' => '#attendance', 'icon' => 'fa-solid fa-user-check'],
             ['name' => 'Procurement', 'href' => '#procurement', 'icon' => 'fa-solid fa-shopping-cart'],
-            ['name' => 'Forms & Formats', 'href' => '#forms-formats', 'icon' => 'fa-solid fa-file-contract'],
+            ['name' => 'Forms & Formats', 'href' => route('forms.view'), 'icon' => 'fa-solid fa-file-contract'],
             ['name' => 'VMS', 'href' => '#vms', 'icon' => 'fa-solid fa-shield-alt'],
             ['name' => 'HIMS', 'href' => '#hims', 'icon' => 'fa-solid fa-hospital'],
-            ['name' => 'Photo Gallery', 'href' => '#photo-gallery', 'icon' => 'fa-solid fa-images'],
+            ['name' => 'Photo Gallery', 'href' => route('gallery.view'), 'icon' => 'fa-solid fa-images'],
             ['name' => 'Canteen Info', 'href' => '#canteen-info', 'icon' => 'fa-solid fa-utensils'],
             ['name' => 'Vehicle', 'href' => '#vehicle', 'icon' => 'fa-solid fa-car'],
         ];

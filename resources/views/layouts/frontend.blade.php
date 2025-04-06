@@ -91,17 +91,30 @@
         // Font Size Adjustment
         function setFontSize(size) {
             let root = document.documentElement;
+            let currentSize = window.getComputedStyle(root).fontSize;
+            let fontSize = parseFloat(currentSize);
+
             if (size === 'increase') {
-                root.style.fontSize = '18px';
-                localStorage.setItem('fontSize', '18px');
+                fontSize = fontSize * 1.2; // Increase by 20%
+                localStorage.setItem('fontSize', `${fontSize}px`);
             } else if (size === 'decrease') {
-                root.style.fontSize = '14px';
-                localStorage.setItem('fontSize', '14px');
+                fontSize = fontSize * 0.8; // Decrease by 20%
+                localStorage.setItem('fontSize', `${fontSize}px`);
             } else {
-                root.style.fontSize = '16px';
+                fontSize = 16; // Reset to default
                 localStorage.setItem('fontSize', '16px');
             }
+
+            root.style.fontSize = `${fontSize}px`;
         }
+
+        // Apply saved font size on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedSize = localStorage.getItem('fontSize');
+            if (savedSize) {
+                document.documentElement.style.fontSize = savedSize;
+            }
+        });
     </script>
 
     @fluxScripts

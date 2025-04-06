@@ -38,8 +38,10 @@ Route::resource('whats_new', WhatsNewController::class);
 
 //PDF Forms
 Route::resource('form_pdfs', FormPdfController::class);
+Route::get('/forms-format', [FormPdfController::class,'view'])->name('forms.view');
 
 //Image Galley
 Route::resource('image_galleries', ImageGalleryController::class);
+Route::get('/gallery', [ImageGalleryController::class,'view'])->name('gallery.view');
 
 require __DIR__ . '/auth.php';
