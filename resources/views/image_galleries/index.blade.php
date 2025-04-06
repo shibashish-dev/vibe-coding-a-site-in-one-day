@@ -1,9 +1,9 @@
 <x-layouts.app>
     <div class="p-6">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-semibold">Quick Infos</h2>
-            <a href="{{ route('quick_infos.create') }}">
-                <flux:button size="sm" color="primary">+ New Quick Info</flux:button>
+            <h2 class="text-2xl font-semibold">Image Gallery</h2>
+            <a href="{{ route('image_galleries.create') }}">
+                <flux:button size="sm" color="primary">+ New Image</flux:button>
             </a>
         </div>
 
@@ -34,25 +34,36 @@
                 <thead class="bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 text-left">
                     <tr class="border-b border-zinc-200 dark:border-zinc-700">
                         <th class="px-4 py-3">Title</th>
-                        <th class="px-4 py-3">Link</th>
-                        <th class="px-4 py-3">Created</th>
-                        <th class="px-4 py-3">Actions</th>
+                        <th class="px-4 py-3">Image</th>
+                        <th class="px-4 py-
+                          <th class=" px-4 py-3">Created</th>
+                        <th class="px-4 py-3">Action</th>
                     </tr>
                 </thead>
                 <tbody class="text-zinc-700 dark:text-zinc-200">
-                    @forelse ($quickInfos as $quickInfo)
+                    @forelse ($imageGalleries as $imageGallery)
                         <tr class="border-b border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800">
-                            <td class="px-4 py-3">{{ $quickInfo->title }}</td>
+                            <td class="px-4 py-3">{{ $imageGallery->title }}</td>
+
                             <td class="px-4 py-3">
-                                <a href="{{ $quickInfo->link }}" target="_blank" class="text-blue-500 underline">Go to
-                                    Link</a>
+                                @if ($imageGallery->image)
+                                    <a href="{{ asset('storage/' . $imageGallery->image) }}" class="text-blue-500 underline"
+                                        target="_blank">
+                                        View
+                                        Image</a>
+                                @else
+                                    <span class="text-zinc-400 italic text-sm">No image</span>
+                                @endif
                             </td>
-                            <td class="px-4 py-3">{{ $quickInfo->created_at->format('M d, Y') }}</td>
+
+                            <td class="px-4 py-3">{{ $imageGallery->created_at->format('M d, Y') }}</td>
+
                             <td class="px-4 py-3 flex gap-2 items-center">
-                                <a href="{{ route('quick_infos.edit', $quickInfo) }}">
+                                <a href="{{ route('image_galleries.edit', $imageGallery) }}">
                                     <flux:button size="xs" color="neutral">Edit</flux:button>
                                 </a>
-                                <form action="{{ route('quick_infos.destroy', $quickInfo) }}" method="POST"
+
+                                <form action="{{ route('image_galleries.destroy', $imageGallery) }}" method="POST"
                                     onsubmit="return confirm('Are you sure?')">
                                     @csrf
                                     @method('DELETE')
@@ -62,7 +73,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-4 py-6 text-center text-zinc-500">No Quick Infos found.</td>
+                            <td colspan="4" class="px-4 py-6 text-center text-zinc-500">No images found.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -70,7 +81,7 @@
         </div>
 
         <div class="mt-4">
-            {{ $quickInfos->links() }}
+            {{ $imageGalleries->appends(request()->query())->links() }}
         </div>
     </div>
 </x-layouts.app>

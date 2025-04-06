@@ -15,28 +15,45 @@
 
         <flux:navlist variant="outline">
             <flux:navlist.group class="grid">
-                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
-                    wire:navigate>
+
+                <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
+                    <i class="fas fa-tachometer-alt mr-2 text-gray-500"></i>
                     {{ __('Dashboard') }}
                 </flux:navlist.item>
+
+                <flux:navlist.item :href="route('circulars.index')" :current="request()->routeIs('circulars.*')"
+                    wire:navigate>
+                    <i class="fas fa-envelope-open-text mr-2 text-gray-500"></i>
+                    {{ __('Circulars') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item :href="route('quick_infos.index')" :current="request()->routeIs('quick_infos.*')"
+                    wire:navigate>
+                    <i class="fas fa-bolt mr-2 text-gray-500"></i>
+                    {{ __('Quick Info') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item :href="route('whats_new.index')" :current="request()->routeIs('whats_new.*')"
+                    wire:navigate>
+                    <i class="fas fa-star mr-2 text-gray-500"></i>
+                    {{ __("What's New") }}
+                </flux:navlist.item>
+
+                <flux:navlist.item :href="route('form_pdfs.index')" :current="request()->routeIs('form_pdfs.*')"
+                    wire:navigate>
+                    <i class="fas fa-file-pdf mr-2 text-gray-500"></i>
+                    {{ __('Form PDFs') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item :href="route('image_galleries.index')"
+                    :current="request()->routeIs('image_galleries.*')" wire:navigate>
+                    <i class="fas fa-image mr-2 text-gray-500"></i>
+                    {{ __('Image Gallery') }}
+                </flux:navlist.item>
+
             </flux:navlist.group>
-
-            <flux:navlist.item icon="folder-git-2" :href="route('circulars.index')"
-                :current="request()->routeIs('circulars.*')" wire:navigate>
-                {{ __('Circulars') }}
-            </flux:navlist.item>
-
-            <flux:navlist.item icon="folder-git-2" :href="route('quick_infos.index')"
-                :current="request()->routeIs('quick_infos.*')" wire:navigate>
-                {{ __('Quick Info') }}
-            </flux:navlist.item>
-
-            <flux:navlist.item icon="folder-git-2" :href="route('whats_new.index')"
-                :current="request()->routeIs('whats_new.*')" wire:navigate>
-                {{ __("What's New") }}
-            </flux:navlist.item>
-
         </flux:navlist>
+
 
         <flux:spacer />
 
