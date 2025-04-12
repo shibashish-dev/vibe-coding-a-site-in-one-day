@@ -7,15 +7,21 @@
 
     <!-- Scrollable Content -->
     <div class="overflow-y-auto scrollbar scrollbar-w-2 scrollbar-thumb-gray-500 scrollbar-track-gray-200 flex-1 p-4">
-        <ul class="space-y-3">
-            @foreach ($infoLinks as $info => $link)
-                <li class="p-2 rounded-md transition hover:bg-green-100">
-                    <a href="{{ $link }}" target="_blank"
-                        class="text-blue-700 font-medium hover:text-green-600 flex items-center gap-2">
-                        <i class="fa-solid fa-link text-green-500"></i> {{ $info }}
-                    </a>
-                </li>
-            @endforeach
-        </ul>
+        @if($infoLinks->isEmpty())
+            <div class="p-2 rounded-md transition hover:bg-green-100 flex justify-center items-center">
+                <span class="text-gray-500">No information available.</span>
+            </div>
+        @else
+            <ul class="space-y-3">
+                @foreach ($infoLinks as $info => $link)
+                    <li class="p-2 rounded-md transition hover:bg-green-100">
+                        <a href="{{ $link }}" target="_blank"
+                            class="text-blue-700 font-medium hover:text-green-600 flex items-center gap-2">
+                            <i class="fa-solid fa-link text-green-500"></i> {{ $info }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
     </div>
 </div>

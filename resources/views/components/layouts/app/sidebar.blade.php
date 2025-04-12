@@ -51,6 +51,12 @@
                     {{ __('Image Gallery') }}
                 </flux:navlist.item>
 
+                <flux:navlist.item :href="route('canteen_info.index')"
+                    :current="request()->routeIs('image_galleries.*')" wire:navigate>
+                    <i class="fa-solid fa-utensils mr-2 text-gray-500"></i>
+                    {{ __('Canteen Info') }}
+                </flux:navlist.item>
+
             </flux:navlist.group>
         </flux:navlist>
 

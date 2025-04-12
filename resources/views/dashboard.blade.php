@@ -68,8 +68,10 @@
         </div>
     </div>
 </x-layouts.app>
+
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('livewire:navigated', () => {
+
         const ctx = document.getElementById('formPdfsChart').getContext('2d');
 
         const chart = new Chart(ctx, {

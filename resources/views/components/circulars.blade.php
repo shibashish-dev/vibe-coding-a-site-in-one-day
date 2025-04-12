@@ -5,6 +5,12 @@
     </h2>
 
     <div class="overflow-y-auto scrollbar scrollbar-w-2 scrollbar-thumb-gray-500 scrollbar-track-gray-200 flex-1 p-4">
+        @if ($circularLinks->isEmpty())
+            <div class="p-2 rounded-md transition hover:bg-red-100 flex justify-center items-center">
+                <span class="text-gray-500">No Inforamtion available.</span>
+            </div>
+        @endif
+
         <ul class="space-y-3">
             @foreach ($circularLinks as $info => $link)
                         <li class="p-2 rounded-md transition hover:bg-red-100">

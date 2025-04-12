@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CanteenController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormPdfController;
 use App\Http\Controllers\ImageGalleryController;
@@ -24,24 +25,37 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
 
-//Dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/forms-format', [FormPdfController::class, 'view'])->name('forms.view');
 
-//Circulars
-Route::resource('circulars', CircularController::class);
+Route::get('/gallery', [ImageGalleryController::class, 'view'])->name('gallery.view');
 
-//Quick Info
-Route::resource('quick_infos', QuickInfoController::class);
+Route::get('/canteen', [CanteenController::class, 'view'])->name('canteen.view');
 
-//What's New
-Route::resource('whats_new', WhatsNewController::class);
 
-//PDF Forms
-Route::resource('form_pdfs', FormPdfController::class);
-Route::get('/forms-format', [FormPdfController::class,'view'])->name('forms.view');
-
-//Image Galley
-Route::resource('image_galleries', ImageGalleryController::class);
-Route::get('/gallery', [ImageGalleryController::class,'view'])->name('gallery.view');
 
 require __DIR__ . '/auth.php';
+
+
+Route::middleware('auth')->group(function () {
+
+    //Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    //Circulars
+    Route::resource('circulars', CircularController::class);
+
+    //Quick Info
+    Route::resource('quick_infos', QuickInfoController::class);
+
+    //What's New
+    Route::resource('whats_new', WhatsNewController::class);
+
+    //PDF Forms
+    Route::resource('form_pdfs', FormPdfController::class);
+
+    //Image Galley
+    Route::resource('image_galleries', ImageGalleryController::class);
+
+    //Canteen Info
+    Route::resource('canteen_info', CanteenController::class);
+});
