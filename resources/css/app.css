@@ -65,3 +65,18 @@ select:focus[data-flux-control] {
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */
+
+
+/* Custom Scrollbar */
+.scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}

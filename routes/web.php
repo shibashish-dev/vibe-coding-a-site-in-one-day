@@ -4,6 +4,7 @@ use App\Http\Controllers\CanteenController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormPdfController;
 use App\Http\Controllers\ImageGalleryController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WhatsNewController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
@@ -59,3 +60,5 @@ Route::middleware('auth')->group(function () {
     //Canteen Info
     Route::resource('canteen_info', CanteenController::class);
 });
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
