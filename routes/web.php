@@ -31,9 +31,8 @@ Route::get('/gallery', [ImageGalleryController::class, 'view'])->name('gallery.v
 
 Route::get('/canteen', [CanteenController::class, 'view'])->name('canteen.view');
 
-
-
 require __DIR__ . '/auth.php';
+require __DIR__ . '/procurement.php';
 
 
 Route::middleware('auth')->group(function () {

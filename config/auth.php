@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'procurement' => [
+            'driver' => 'session',
+            'provider' => 'procurement_users',
+        ],
     ],
 
     /*
@@ -65,10 +69,10 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'procurement_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\ProcurementUser::class,
+        ],
     ],
 
     /*
@@ -96,6 +100,11 @@ return [
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'procurement_users' => [
+            'provider' => 'procurement_users',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
         ],
     ],
 

@@ -26,7 +26,7 @@ class Sidebar extends Component
             ['name' => 'e-Office', 'href' => '#e-office', 'icon' => 'fa-solid fa-building'],
             ['name' => 'Integrated Info System', 'href' => '#iis', 'icon' => 'fa-solid fa-network-wired'],
             ['name' => 'Attendance', 'href' => '#attendance', 'icon' => 'fa-solid fa-user-check'],
-            ['name' => 'Procurement', 'href' => '#procurement', 'icon' => 'fa-solid fa-shopping-cart'],
+            ['name' => 'Procurement', 'href' => route('procurement.login'), 'icon' => 'fa-solid fa-shopping-cart'],
             ['name' => 'Forms & Formats', 'href' => route('forms.view'), 'icon' => 'fa-solid fa-file-contract'],
             ['name' => 'VMS', 'href' => '#vms', 'icon' => 'fa-solid fa-shield-alt'],
             ['name' => 'HIMS', 'href' => '#hims', 'icon' => 'fa-solid fa-hospital'],
