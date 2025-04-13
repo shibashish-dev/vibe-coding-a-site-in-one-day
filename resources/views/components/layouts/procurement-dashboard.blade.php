@@ -33,25 +33,25 @@
                 </a>
 
                 @if (auth('procurement')->user()->role === 'procurement_user')
-                    <a href="#" class="block px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-700 dark:text-white
-                                {{ request()->routeIs('procurement.new') ? 'bg-gray-200 dark:bg-zinc-700' : '' }}">
+                    <a href="{{ route('procurement.new') }}" class="block px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-700 dark:text-white
+                                    {{ request()->routeIs('procurement.new') ? 'bg-gray-200 dark:bg-zinc-700' : '' }}">
                         New Procurement
                     </a>
                 @else
                     <a href="#" class="block px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-700 dark:text-white
-                                {{ request()->routeIs('procurement.all') ? 'bg-gray-200 dark:bg-zinc-700' : '' }}">
+                                    {{ request()->routeIs('procurement.all') ? 'bg-gray-200 dark:bg-zinc-700' : '' }}">
                         All Procurement Data
                     </a>
 
                     <a href="{{ route('procurement.sections.index') }}"
                         class="block px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-700 dark:text-white
-                                {{ request()->routeIs('procurement.sections.index') ? 'bg-gray-200 dark:bg-zinc-700' : '' }}">
+                                    {{ request()->routeIs('procurement.sections.index') ? 'bg-gray-200 dark:bg-zinc-700' : '' }}">
                         Sections
                     </a>
 
                     <a href="{{ route('procurement.procurement-types.index') }}"
                         class="block px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-zinc-700 text-gray-700 dark:text-white
-                                {{ request()->routeIs('procurement.procurement-types.index') ? 'bg-gray-200 dark:bg-zinc-700' : '' }}">
+                                    {{ request()->routeIs('procurement.procurement-types.index') ? 'bg-gray-200 dark:bg-zinc-700' : '' }}">
                         Procurement Types
                     </a>
                 @endif
