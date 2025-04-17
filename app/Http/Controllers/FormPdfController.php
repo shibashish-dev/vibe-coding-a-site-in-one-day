@@ -93,7 +93,7 @@ class FormPdfController extends Controller
 
     public function view(Request $request)
     {
-        $search = ($_GET['id']) ? $_GET['id'] : $request->input('search');
+        $search = $_GET['id'] ?? $request->input('search');
 
         $formPdfs = FormPdf::when($search, function ($query, $search) {
             return $query->where('title', 'like', '%' . $search . '%')
