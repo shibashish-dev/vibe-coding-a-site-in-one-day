@@ -1,5 +1,5 @@
 <div
-    class="w-full md:w-[300px] h-auto md:h-[840px] bg-white/30 backdrop-blur-xl shadow-2xl p-4 md:p-5 rounded-2xl border border-white/20 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent text-xs md:text-sm">
+    class="w-full lg:w-[250px] xl:w-[300px] h-auto lg:h-[840px] bg-white/30 backdrop-blur-xl shadow-2xl p-4 lg:p-5 rounded-2xl border border-white/20 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent text-xs lg:text-sm">
     <!-- Menu Section -->
     <aside class="mb-6">
         <h2 class="text-base md:text-lg font-semibold text-gray-800 border-b border-red-300 pb-2 flex items-center gap-2 cursor-pointer md:cursor-default"
