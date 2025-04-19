@@ -16,6 +16,10 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
+        $request->validate([
+            'search' => 'required|string|max:255',
+        ]);
+
         $models = [
             Canteen::class,
             Circular::class,
@@ -29,7 +33,6 @@ class SearchController extends Controller
         foreach ($models as $model) {
             $table = (new $model)->getTable();
             $columns = Schema::getColumnListing($table);
-
             $search->registerModel($model, $columns);
         }
 

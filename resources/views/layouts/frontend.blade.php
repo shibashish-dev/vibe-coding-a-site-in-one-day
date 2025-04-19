@@ -15,9 +15,10 @@
 <body class="bg-gray-100">
     <!-- Header -->
     <header class="bg-white shadow">
-        <div class="w-full mx-auto flex flex-col lg:flex-row items-center px-4 py-4 space-y-4 lg:space-y-0">
+        <div class="w-full mx-auto flex flex-col lg:flex-row items-center px-4 py-4 gap-6 md:gap-8 lg:gap-0">
             <!-- Left Section: HWB Logo & Text -->
-            <div class="flex items-center space-x-4 lg:space-x-6 flex-1 w-full lg:w-auto">
+            <div
+                class="flex flex-col md:flex-row items-center justify-center md:justify-start space-x-4 lg:space-x-6 w-full md:w-auto md:flex-1">
                 <div class="flex-shrink-0 relative group">
                     <img src="{{ asset('logo.png') }}" alt="HWB Logo"
                         class="w-16 h-16 lg:w-24 lg:h-24 object-contain transition-transform duration-300 group-hover:scale-105">
@@ -25,7 +26,7 @@
                         class="absolute inset-0 rounded-full opacity-0 group-hover:opacity-20 bg-blue-400 blur-md transition-opacity duration-500 -z-10">
                     </div>
                 </div>
-                <div class="flex flex-col justify-center">
+                <div class="flex flex-col items-center md:items-start text-center md:text-left mt-3 md:mt-0">
                     <h1
                         class="text-lg lg:text-xl font-bold tracking-wide mb-1 bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent">
                         Government of India</h1>
@@ -36,12 +37,12 @@
             </div>
 
             <!-- Centered Emblem -->
-            <div class="flex-1 flex justify-center">
+            <div class="flex-1 flex justify-center my-4 md:my-0">
                 <img src="{{ asset('emblm.png') }}" alt="Emblem" class="h-16 lg:h-24">
             </div>
 
             <!-- Right: Search Bar -->
-            <div class="flex-1 flex flex-col items-center lg:items-end space-y-3 w-full lg:w-auto">
+            <div class="flex-1 flex flex-col items-center lg:items-end space-y-3 w-full md:w-auto">
                 <!-- Text Size Controls -->
                 <div class="flex items-center space-x-4 mb-2">
                     <span class="text-xs lg:text-sm font-semibold text-gray-700">Text Size:</span>
@@ -69,7 +70,6 @@
             </div>
         </div>
     </header>
-
     <x-navbar />
 
     <main>
