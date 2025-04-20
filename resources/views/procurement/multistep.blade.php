@@ -23,13 +23,15 @@
     </div>
 
     <div class="flex justify-end max-w-6xl mx-auto mt-8">
-        <button onclick="window.print()" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 print:hidden">
-            Save and Print All
-        </button>
+        <form method="GET" action="{{ route('procurement.preview', $entry->id) }}">
+            <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 print:hidden">
+                Save and Preview
+            </button>
+        </form>
     </div>
 
+
     <script>
-        // Optional: basic collapsible UI
         document.querySelectorAll('[data-toggle]').forEach(button => {
             button.addEventListener('click', () => {
                 const target = document.getElementById(button.dataset.toggle);

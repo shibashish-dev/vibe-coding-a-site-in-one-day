@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained('procurement_users')->onDelete('cascade');
             $table->foreignId('section_id')->constrained()->onDelete('cascade');
             $table->foreignId('procurement_type_id')->constrained()->onDelete('cascade');
-
             $table->string('email')->nullable();
             $table->string('telephone')->nullable();
 

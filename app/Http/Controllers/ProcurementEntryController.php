@@ -9,13 +9,36 @@ use Illuminate\Http\Request;
 
 class ProcurementEntryController extends Controller
 {
+
     public function create()
     {
+        $userId = auth()->id();
+
+        $existing = ProcurementEntry::where('user_id', $userId)
+            ->where('status', 'draft')
+            ->latest()
+            ->first();
+
+        if ($existing) {
+            return redirect()->route('procurement.multistep.start', ['entry' => $existing->id]);
+        }
+
         $sections = Section::all();
         $procurementTypes = ProcurementType::all();
         $users = ProcurementUser::where('role', 'procurement_user')->get();
 
         return view('procurement.new-entry', compact('sections', 'procurementTypes', 'users'));
+    }
+
+    public function destroy(ProcurementEntry $entry)
+    {
+        $entry->delete();
+
+        return redirect()->route('dashboard')->with('swal', [
+            'icon' => 'success',
+            'title' => 'Deleted',
+            'text' => 'The procurement entry has been deleted successfully.'
+        ]);
     }
 
     public function getUserDetails($id)

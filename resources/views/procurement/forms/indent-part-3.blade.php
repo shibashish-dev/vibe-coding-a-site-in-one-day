@@ -4,8 +4,8 @@
         <button data-toggle="indent-part-3" class="text-blue-600 dark:text-blue-400 text-sm">Toggle</button>
     </div>
 
-    <div class="p-4 space-y-4" id="indent-part-3">
-        <form method="POST" action="#">
+    <div class="p-4 space-y-4 hidden" id="indent-part-3">
+        <form method="POST" action="{{ route('procurement.indentThree.store', $entry->id) }}">
             @csrf
 
             @foreach([
@@ -27,6 +27,7 @@
                 <div>
                     <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">{{ $label }}</label>
                     <input type="text" name="{{ $name }}"
+                        value="{{ old($name, $entry->indentPartThree?->$name ?? '') }}"
                         class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
                 </div>
             @endforeach
@@ -38,22 +39,26 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Name & Designation</label>
-                        <input type="text" name="indenting_officer" value="Jit Basak, TO-C"
+                        <input type="text" name="indenting_officer"
+                            value="{{ old('indenting_officer', $entry->indentPartThree->indenting_officer ?? 'Jit Basak, TO-C') }}"
                             class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
                     </div>
                     <div>
                         <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Section/Division/Unit</label>
-                        <input type="text" name="indenting_unit" value="Instrumentation / HWBF Talcher"
+                        <input type="text" name="indenting_unit"
+                            value="{{ old('indenting_unit', $entry->indentPartThree->indenting_unit ?? 'Instrumentation / HWBF Talcher') }}"
                             class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
                     </div>
                     <div>
                         <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Phone</label>
-                        <input type="text" name="indenting_phone" value="06760-262378, Ext-529"
+                        <input type="text" name="indenting_phone"
+                            value="{{ old('indenting_phone', $entry->indentPartThree->indenting_phone ?? '06760-262378, Ext-529') }}"
                             class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
                     </div>
                     <div>
                         <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Email ID</label>
-                        <input type="email" name="indenting_email" value="jit@tal.hwb.gov.in"
+                        <input type="email" name="indenting_email"
+                            value="{{ old('indenting_email', $entry->indentPartThree->indenting_email ?? 'jit@tal.hwb.gov.in') }}"
                             class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
                     </div>
                 </div>
@@ -65,17 +70,20 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Name & Designation</label>
-                        <input type="text" name="approving_authority" value="Jaitul Haque (OSD)"
+                        <input type="text" name="approving_authority"
+                            value="{{ old('approving_authority', $entry->indentPartThree->approving_authority ?? 'Jaitul Haque (OSD)') }}"
                             class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
                     </div>
                     <div>
                         <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Phone</label>
-                        <input type="text" name="approving_phone" value="06760-262371"
+                        <input type="text" name="approving_phone"
+                            value="{{ old('approving_phone', $entry->indentPartThree->approving_phone ?? '06760-262371') }}"
                             class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                        <input type="email" name="approving_email" value="gm@tal.hwb.gov.in"
+                        <input type="email" name="approving_email"
+                            value="{{ old('approving_email', $entry->indentPartThree->approving_email ?? 'gm@tal.hwb.gov.in') }}"
                             class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
                     </div>
                 </div>

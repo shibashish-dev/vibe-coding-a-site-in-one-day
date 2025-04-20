@@ -6,6 +6,7 @@ use App\Http\Controllers\ProcurementTypeController;
 use App\Http\Controllers\SectionController;
 use App\Livewire\Auth\Procurement\Login;
 use App\Livewire\Auth\Procurement\Register;
+use App\Models\ProcurementEntry;
 
 Route::prefix('procurement')->name('procurement.')->group(function () {
     Route::middleware('guest:procurement')->group(function () {
@@ -20,10 +21,30 @@ Route::prefix('procurement')->name('procurement.')->group(function () {
         Route::get('/dashboard', function () {
             $user = auth('procurement')->user();
 
-            return $user->role === 'procurement_admin'
-                ? view('procurement.admin')
-                : view('procurement.user');
+            $entries = $user->role === 'procurement_admin'
+                ? ProcurementEntry::with(['user', 'section', 'procurementType'])
+                    ->where('status', 'completed')
+                    ->latest()
+                    ->paginate(10)
+                : ProcurementEntry::with(['section', 'procurementType'])
+                    ->where('user_id', $user->id)
+                    ->where('status', 'completed')
+                    ->latest()
+                    ->paginate(10);
+
+            $view = $user->role === 'procurement_admin'
+                ? 'procurement.admin'
+                : 'procurement.user';
+
+            return view($view, [
+                'entries' => $entries,
+                'swal' => session('swal')
+            ]);
         })->name('dashboard');
+
+        Route::delete('/entries/{entry}', [ProcurementEntryController::class, 'destroy'])
+            ->name('entries.destroy');
+
         Route::post('logout', [ProcurementAuthController::class, 'logout'])->name('prologout');
 
         Route::resource('sections', SectionController::class);
@@ -40,10 +61,17 @@ Route::prefix('procurement')->name('procurement.')->group(function () {
 
         /** Form Partials */
         Route::post('vec/{entry}', [ProcurementMultistepController::class, 'storeVec'])->name('vec.store');
-        Route::post('gem-direct/{entry}', [ProcurementMultistepController::class, 'storeGemDirect'])->name('gem.store');
-        Route::post('indent-part-1/{entry}', [ProcurementMultistepController::class, 'storeIndent1'])->name('indent1.store');
-        Route::post('indent-part-2/{entry}', [ProcurementMultistepController::class, 'storeIndent2'])->name('indent2.store');
-        Route::post('indent-part-3/{entry}', [ProcurementMultistepController::class, 'storeIndent3'])->name('indent3.store');
+        Route::post('gem-direct/{entry}', [ProcurementMultistepController::class, 'storeGem'])->name('gem.store');
+        Route::post('indent-part-1/{entry}', [ProcurementMultistepController::class, 'storeIndentOne'])->name('indentOne.store');
+        Route::post('indent-part-2/{entry}', [ProcurementMultistepController::class, 'storeIndentTwo'])->name('indentTwo.store');
+        Route::post('indent-part-3/{entry}', [ProcurementMultistepController::class, 'storeIndentThree'])->name('indentThree.store');
         Route::post('pac/{entry}', [ProcurementMultistepController::class, 'storePac'])->name('pac.store');
+
+        Route::get('preview/{entry}', [ProcurementMultistepController::class, 'preview'])
+            ->name('preview');
+
+        Route::post('preview/submit/{entry}', [ProcurementMultistepController::class, 'submitAndPrint'])
+            ->name('preview.submit');
+
     });
 });

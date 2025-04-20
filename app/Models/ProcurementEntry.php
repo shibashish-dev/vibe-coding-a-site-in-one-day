@@ -14,6 +14,7 @@ class ProcurementEntry extends Model
         'procurement_type_id',
         'email',
         'telephone',
+        'status',
     ];
 
     public function user()
@@ -26,16 +27,45 @@ class ProcurementEntry extends Model
         return $this->belongsTo(Section::class);
     }
 
+    public function type()
+    {
+        return $this->belongsTo(ProcurementType::class);
+    }
+
     public function procurementType()
     {
         return $this->belongsTo(ProcurementType::class);
     }
 
-    // Optional: Relationship with detailed forms later
-    // public function vec()
-    // {
-    //     return $this->hasOne(VEC::class);
-    // }
+    public function vec()
+    {
+        return $this->hasOne(VEC::class);
+    }
 
-    // etc. for gem, indent, pac
+    public function gem()
+    {
+        return $this->hasOne(GemEntry::class);
+    }
+
+    public function indentPartOne()
+    {
+        return $this->hasOne(IndentPartOneForm::class);
+    }
+
+    public function indentPartTwo()
+    {
+        return $this->hasOne(IndentPartTwo::class);
+    }
+
+    public function indentPartThree()
+    {
+        return $this->hasOne(IndentPartThree::class);
+    }
+
+    public function pac()
+    {
+        return $this->hasOne(PacEntry::class);
+    }
+
+
 }

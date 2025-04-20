@@ -4,157 +4,190 @@
         <button data-toggle="indent-part-2" class="text-blue-600 dark:text-blue-400 text-sm">Toggle</button>
     </div>
 
-    <div class="p-4 space-y-4" id="indent-part-2">
-        <form method="POST" action="#">
+    <div class="p-4 space-y-4 hidden" id="indent-part-2">
+        <form method="POST" action="{{ route('procurement.indentTwo.store', $entry->id) }}" enctype="multipart/form-data">
             @csrf
 
-            {{-- 1. Estimated Cost --}}
-            <div>
-                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Total Estimated Cost</label>
-                <input type="text" name="total_estimated_cost" value="Rs. 47070/-"
-                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-            </div>
-
-            {{-- 1(a) to 1(i) Basic breakups --}}
-            @foreach([
-                'basic_cost' => 'Basic Cost (Base year)',
-                'packing_forwarding' => 'Packing and Forwarding (incl. GST)',
-                'custom_duty' => 'Custom Duty',
-                'gst_basic' => 'GST on Basic (rate)',
-                'transportation' => 'Transportation (incl. GST)',
-                'installation' => 'Installation & Commissioning',
-                'training' => 'Training Charges',
-                'gst_f_g' => 'GST on (f) & (g)',
-                'other_charges' => 'Any Other Charges'
-            ] as $name => $label)
-                <div>
-                    <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">{{ $label }}</label>
-                    <input type="text" name="{{ $name }}" class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-                </div>
-            @endforeach
-
-            {{-- 2. Category --}}
-            <div>
-                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Category of Item</label>
-                <input type="text" name="item_category" value="Spare"
-                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-            </div>
-
-            <div>
-                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Technical Category</label>
-                <input type="text" name="technical_category" value="Electronics"
-                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-            </div>
-
-            {{-- 3. GeM ID --}}
-            <div>
-                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Is GeM Product ID available?</label>
-                <input type="text" name="gem_product_available" value="NO"
-                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-            </div>
-
-            {{-- 5. Proprietary --}}
-            <div>
-                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Is item proprietary?</label>
-                <input type="text" name="is_proprietary" value="Yes"
-                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-            </div>
-
-            {{-- 6. Evaluation --}}
-            <div>
-                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Basis of Evaluation</label>
-                <input type="text" name="evaluation_basis" value="Overall"
-                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-            </div>
-
-            {{-- 7. Warranty --}}
+            {{-- Cost Breakdown --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                @foreach ([
+                    'basic_cost' => 'Basic Cost',
+                    'packing_forwarding' => 'Packing & Forwarding',
+                    'custom_duty' => 'Custom Duty',
+                    'gst_basic' => 'GST on Basic',
+                    'transportation' => 'Transportation',
+                    'installation' => 'Installation',
+                    'training' => 'Training',
+                    'gst_f_g' => 'GST on F&G',
+                    'other_charges' => 'Other Charges'
+                ] as $field => $label)
+                    <div>
+                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">{{ $label }}</label>
+                        <input type="number" step="0.01" name="{{ $field }}"
+                            value="{{ old($field, optional($entry->indentPartTwo)->$field) }}"
+                            class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white">
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="mt-4">
+                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Total Estimated Cost</label>
+                <input type="number" step="0.01" name="total_estimated_cost"
+                    value="{{ old('total_estimated_cost', optional($entry->indentPartTwo)->total_estimated_cost) }}"
+                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white">
+            </div>
+
+            {{-- Categories --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
                 <div>
-                    <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Is warranty required?</label>
-                    <input type="text" name="is_warranty" value="Yes"
-                        class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
+                    <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Item Category</label>
+                    <input type="text" name="item_category"
+                        value="{{ old('item_category', optional($entry->indentPartTwo)->item_category) }}"
+                        class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white">
                 </div>
                 <div>
-                    <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Warranty Period</label>
-                    <input type="text" name="warranty_period" value="01 Year"
-                        class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
+                    <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Technical Category</label>
+                    <input type="text" name="technical_category"
+                        value="{{ old('technical_category', optional($entry->indentPartTwo)->technical_category) }}"
+                        class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white">
                 </div>
             </div>
 
-            {{-- 8. PDI --}}
-            <div>
-                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Is Pre-Despatch Inspection (PDI) required?</label>
-                <input type="text" name="is_pdi" value="No"
-                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
+            {{-- Checkboxes --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                @foreach ([
+                    'developmental_in_india' => 'Developmental in India?',
+                    'gem_product_available' => 'GEM Product Available?',
+                    'mse_reserved_list' => 'MSE Reserved?',
+                    'gte_exempted_list' => 'GTE Exempted?',
+                    'mii_reserved_list' => 'MII Reserved?',
+                    'is_proprietary' => 'Proprietary Item?'
+                ] as $field => $label)
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" name="{{ $field }}" value="1"
+                            {{ old($field, optional($entry->indentPartTwo)->$field) ? 'checked' : '' }}>
+                        <label class="text-sm text-gray-700 dark:text-gray-300">{{ $label }}</label>
+                    </div>
+                @endforeach
             </div>
 
-            {{-- 9. Installation Responsibility --}}
-            <div>
-                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Installation & Commissioning Responsibility</label>
-                <input type="text" name="installation_scope" value="Department"
-                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
+            {{-- GEM Params --}}
+            <div class="mt-4">
+                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">GEM Additional Parameters</label>
+                <input type="text" name="gem_additional_parameters"
+                    value="{{ old('gem_additional_parameters', optional($entry->indentPartTwo)->gem_additional_parameters) }}"
+                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white">
             </div>
 
-            {{-- 13. Payment Terms --}}
-            <div>
-                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Payment Terms</label>
-                <input type="text" name="payment_terms" value="NA"
-                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
+            {{-- GEM Report Upload --}}
+            <div class="mt-4">
+                <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Upload GEM Report</label>
+                <input type="file" name="gem_report_upload"
+                    class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white">
+                @if(optional($entry->indentPartTwo)->gem_report_upload)
+                    <p class="text-sm text-green-600 mt-1">
+                        Existing File:
+                        <a href="{{ Storage::url($entry->indentPartTwo->gem_report_upload) }}" target="_blank" class="underline">View</a>
+                    </p>
+                @endif
             </div>
 
-            {{-- Signature Section --}}
-            <div class="border-t pt-6 mt-6">
-                <h3 class="font-semibold text-gray-800 dark:text-white text-md mb-2">Indenting Officer Details</h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {{-- Evaluation --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                @foreach ([
+                    'evaluation_basis' => 'Evaluation Basis',
+                    'bidder_qualification_criteria' => 'Bidder Qualification Criteria',
+                    'financial_criteria_approval' => 'Financial Criteria Approval',
+                    'bid_evaluation_criteria' => 'Bid Evaluation Criteria',
+                    'acceptance_criteria' => 'Acceptance Criteria'
+                ] as $field => $label)
                     <div>
-                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Name & Designation</label>
-                        <input type="text" name="indenting_officer" value="Jit Basak, TO-C"
-                            class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
+                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">{{ $label }}</label>
+                        <input type="text" name="{{ $field }}"
+                            value="{{ old($field, optional($entry->indentPartTwo)->$field) }}"
+                            class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white">
                     </div>
-                    <div>
-                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Section/Division/Unit</label>
-                        <input type="text" name="indenting_unit" value="Instrumentation / HWBF Talcher"
-                            class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-                    </div>
-                    <div>
-                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Phone</label>
-                        <input type="text" name="indenting_phone" value="06760-262380, Ext-529"
-                            class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-                    </div>
-                    <div>
-                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Email ID</label>
-                        <input type="email" name="indenting_email" value="jit@tal.hwb.gov.in"
-                            class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-                    </div>
-                </div>
+                @endforeach
             </div>
 
-            <div class="border-t pt-6 mt-6">
-                <h3 class="font-semibold text-gray-800 dark:text-white text-md mb-2">Approving Authority Details</h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {{-- Warranty --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                @foreach ([
+                    'is_warranty' => 'Warranty Applicable?',
+                    'warranty_period' => 'Warranty Period',
+                    'warranty_psd' => 'Warranty PSD'
+                ] as $field => $label)
                     <div>
-                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Name & Designation</label>
-                        <input type="text" name="approving_authority" value="Jaitul Haque (OSD)"
-                            class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
+                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">{{ $label }}</label>
+                        @if ($field === 'is_warranty')
+                            <input type="checkbox" name="{{ $field }}" value="1"
+                                {{ old($field, optional($entry->indentPartTwo)->$field) ? 'checked' : '' }}>
+                        @else
+                            <input type="text" name="{{ $field }}"
+                                value="{{ old($field, optional($entry->indentPartTwo)->$field) }}"
+                                class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white">
+                        @endif
                     </div>
-                    <div>
-                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Phone</label>
-                        <input type="text" name="approving_phone" value="06760-262371"
-                            class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-                    </div>
-                    <div class="md:col-span-2">
-                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                        <input type="email" name="approving_email" value="gm@tal.hwb.gov.in"
-                            class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white" />
-                    </div>
-                </div>
+                @endforeach
             </div>
 
-            <div class="flex justify-end mt-6">
+            {{-- Training --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                @foreach ([
+                    'training_required' => 'Training Required?',
+                    'training_place' => 'Training Place',
+                    'training_personnel' => 'Training Personnel',
+                    'training_days' => 'Training Days'
+                ] as $field => $label)
+                    <div>
+                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">{{ $label }}</label>
+                        @if ($field === 'training_required')
+                            <input type="checkbox" name="{{ $field }}" value="1"
+                                {{ old($field, optional($entry->indentPartTwo)->$field) ? 'checked' : '' }}>
+                        @else
+                            <input type="text" name="{{ $field }}"
+                                value="{{ old($field, optional($entry->indentPartTwo)->$field) }}"
+                                class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white">
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Payment & Misc --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                @foreach ([
+                    'mse_experience_exemption' => 'MSE Experience Exemption',
+                    'mse_turnover_exemption' => 'MSE Turnover Exemption',
+                    'payment_terms' => 'Payment Terms',
+                    'advance_milestone_details' => 'Advance Milestone Details',
+                    'pro_rata_details' => 'Pro Rata Details',
+                    'is_for_rnd' => 'For R&D?',
+                    'is_imported' => 'Is Imported?',
+                    'local_content_percent' => 'Local Content %',
+                    'project_validity' => 'Project Validity',
+                    'site_visit_approval' => 'Site Visit Approval',
+                    'evaluation_time' => 'Evaluation Time',
+                    'indenting_officer' => 'Indenting Officer',
+                    'indenting_unit' => 'Indenting Unit',
+                    'indenting_phone' => 'Indenting Phone',
+                    'indenting_email' => 'Indenting Email',
+                    'approving_authority' => 'Approving Authority',
+                    'approving_phone' => 'Approving Phone',
+                    'approving_email' => 'Approving Email'
+                ] as $field => $label)
+                    <div>
+                        <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">{{ $label }}</label>
+                        <input type="text" name="{{ $field }}"
+                            value="{{ old($field, optional($entry->indentPartTwo)->$field) }}"
+                            class="w-full border rounded px-3 py-2 dark:bg-zinc-800 dark:text-white">
+                    </div>
+                @endforeach
+            </div>
+
+            {{-- Submit --}}
+            <div class="mt-6 text-right">
                 <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">
-                    Save Indent Part-II
+                    Save Indent Part II
                 </button>
             </div>
         </form>

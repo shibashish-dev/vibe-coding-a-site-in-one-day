@@ -30,7 +30,7 @@
         @media (min-width: 1200px) {
             .center-content {
                 margin: 0 100px;
-                width: 80%;
+                width: 84%;
             }
 
             .custom-lg\:col-span-2 {
