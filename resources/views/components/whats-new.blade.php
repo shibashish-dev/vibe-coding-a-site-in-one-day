@@ -61,7 +61,7 @@
 </style>
 
 
-<aside class="relative bg-white drop-shadow-2xl p-4 h-auto md:h-[840px] flex flex-col rounded-lg">
+<aside class="relative bg-white drop-shadow-2xl p-4 h-auto md:h-[820px] flex flex-col rounded-lg">
     <!-- Sticky Header -->
     <h2
         class="text-lg md:text-xl font-semibold text-black flex items-center sticky top-0 bg-gray-200 z-10 p-3 md:p-4 shadow-md rounded-t-lg">
@@ -70,7 +70,7 @@
 
     <!-- Scrollable Content -->
     <div
-        class="mt-4 space-y-3 overflow-y-auto flex-1 pr-2 scrollbar scrollbar-w-2 scrollbar-thumb-gray-400 scrollbar-track-transparent">
+        class="no-scrollbar mt-4 space-y-3 overflow-y-auto flex-1 pr-2 scrollbar scrollbar-w-2 scrollbar-thumb-gray-400 scrollbar-track-transparent">
         @if ($news->isEmpty())
             <div class="p-2 rounded-md transition hover:bg-gray-100 flex justify-center items-center">
                 <span class="text-gray-500 text-sm md:text-base">No Information available.</span>

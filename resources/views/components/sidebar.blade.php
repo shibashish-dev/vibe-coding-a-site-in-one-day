@@ -1,5 +1,24 @@
+<style>
+    .sidebar {
+    position: sticky;
+    top: 16px;
+    height: auto !important;
+}
+
+/* Responsive behavior for Sidebar */
+@media (max-width: 1024px) {
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: 840px;
+        margin-top: 24px;
+    }
+}
+
+</style>
 <div
-    class="w-full lg:w-[250px] xl:w-[300px] h-auto lg:h-[840px] bg-white/30 backdrop-blur-xl shadow-2xl p-4 lg:p-5 rounded-2xl border border-white/20 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent text-xs lg:text-sm">
+    class="lg:!h-[820px] no-scrollbar  text-xs lg:text-sm sidebar no-scrollbar  bg-white/30 backdrop-blur-xl shadow-2xl p-4 lg:p-5 rounded-2xl border border-white/20 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent ">
+
     <!-- Menu Section -->
     <aside class="mb-6">
         <h2 class="text-base md:text-lg font-semibold text-gray-800 border-b border-red-300 pb-2 flex items-center gap-2 cursor-pointer md:cursor-default"
@@ -41,6 +60,7 @@
     </aside>
 </div>
 
+<!-- Sidebar Script -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Menu Dropdown Toggle
@@ -61,7 +81,7 @@
         const linksChevron = linksToggle.querySelector('.fa-chevron-down');
 
         linksToggle.addEventListener('click', function () {
-            if (window.innerWidth < 768) { // Only toggle on mobile
+            if (window.innerWidth < 768) {
                 linksDropdown.classList.toggle('hidden');
                 linksChevron.classList.toggle('rotate-180');
             }
@@ -74,3 +94,4 @@
         }
     });
 </script>
+

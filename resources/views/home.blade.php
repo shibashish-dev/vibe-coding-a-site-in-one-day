@@ -1,97 +1,140 @@
 <x-frontend>
 
     <style>
-        /* Custom breakpoints */
-        @media (min-width: 640px) {
-            .custom-sm\:flex-row {
-                flex-direction: row;
+        .main-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1900px;
+            margin: 30px auto;
+            padding: 0 16px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: minmax(200px, 240px) 1fr minmax(200px, 350px);
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* Main Content */
+        .content-area {
+            width: 100%;
+            min-width: 0;
+        }
+
+        /* What's New */
+        .whats-new {
+            position: sticky;
+            top: 16px;
+            height: min-content;
+        }
+
+        /* Content inside */
+        .slider-container {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .content-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            width: 100%;
+            min-width: 0;
+        }
+
+        /* Responsive adjustments for 1280px to 1100px */
+        @media (max-width: 1280px) and (min-width: 1100px) {
+            .main-grid {
+                grid-template-columns: 1fr;
             }
 
-            .custom-sm\:w-1\/2 {
-                width: 50%;
+            .whats-new {
+                position: static;
+                width: 100%;
+                height: auto;
+                margin-top: 24px;
             }
         }
 
-        @media (min-width: 768px) {
-            .custom-md\:grid-cols-12 {
-                grid-template-columns: repeat(12, minmax(0, 1fr));
+        /* Mobile adjustments for below 1100px */
+        @media (max-width: 1099px) {
+            .main-grid {
+                grid-template-columns: 1fr;
             }
 
-            .custom-md\:col-span-3 {
-                grid-column: span 3 / span 3;
-            }
-
-            .custom-md\:col-span-6 {
-                grid-column: span 6 / span 6;
-            }
-        }
-
-        /* The key breakpoint for your 1200-1800 issue */
-        @media (min-width: 1200px) {
-            .center-content {
-                margin: 0 100px;
-                width: 84%;
-            }
-
-            .custom-lg\:col-span-2 {
-                grid-column: span 2 / span 2;
-            }
-
-            .custom-lg\:col-span-7 {
-                grid-column: span 7 / span 7;
-            }
-
-            .custom-lg\:col-span-3 {
-                grid-column: span 3 / span 3;
+            .whats-new {
+                position: static;
+                width: 100%;
+                height: auto;
+                margin-top: 24px;
             }
         }
 
-        /* For very large screens */
-        @media (min-width: 1800px) {
-            .center-content {
-                margin: 0 auto;
-                width: 95%;
+        /* Responsive behavior */
+        @media (max-width: 1280px) and (min-width: 1100px) {
+            .sidebar {
+                position: static !important;
+                width: 100%;
+                height: 840px;
+                margin-top: 24px;
+            }
+        }
+
+        @media (max-width: 1099px) {
+            .sidebar {
+                position: static !important;
+                width: 100%;
+                height: 840px;
+                margin-top: 24px;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            .sidebar {
+                position: static !important;
+                width: 100%;
+                height: 840px;
+                margin-top: 24px;
             }
 
-            .custom-xl\:col-span-2 {
-                grid-column: span 2 / span 2;
+            .main-grid {
+                grid-template-columns: 1fr;
             }
 
-            .custom-xl\:col-span-7 {
-                grid-column: span 7 / span 7;
-            }
-
-            .custom-xl\:col-span-3 {
-                grid-column: span 3 / span 3;
+            .whats-new {
+                position: static;
+                width: 100%;
+                height: auto;
+                overflow: visible;
+                margin-top: 24px;
             }
         }
     </style>
 
-    <div class="w-full mx-auto grid grid-cols-1 custom-md:grid-cols-12 gap-4 mt-4 px-4">
-        <!-- Sidebar -->
-        <div class="custom-md:col-span-3 custom-lg:col-span-2">
+    <div class="main-container my-5">
+        <div class="main-grid">
+            <!-- Sidebar -->
             <x-sidebar />
-        </div>
 
-        <!-- Main Content -->
-        <div class="custom-md:col-span-6 custom-lg:col-span-7 center-content">
-            <x-slider :images="[asset('image1.jpg'), asset('image2.jpg'), asset('image3.jpg')]" />
-
-            <div class="flex flex-col custom-sm:flex-row mt-4 gap-4 w-full">
-                <div class="w-full custom-sm:w-1/2">
-                    <x-circulars />
+            <!-- Center Main Content -->
+            <div class="content-area">
+                <div class="slider-container">
+                    <x-slider :images="[asset('image1.jpg'), asset('image2.jpg'), asset('image3.jpg')]" />
                 </div>
-                <div class="w-full custom-sm:w-1/2">
+
+                <div class="content-row mt-4">
+                    <x-circulars />
                     <x-quick-infos />
                 </div>
             </div>
-        </div>
 
-        <!-- What's New -->
-        <div class="custom-md:col-span-3 custom-lg:col-span-3">
-            <x-whats-news />
+            <!-- What's New (Right Side Always) -->
+            <div class="whats-new">
+                <x-whats-news />
+            </div>
         </div>
     </div>
-
 
 </x-frontend>
