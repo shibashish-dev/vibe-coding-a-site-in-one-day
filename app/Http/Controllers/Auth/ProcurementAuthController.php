@@ -17,8 +17,9 @@ class ProcurementAuthController extends Controller
     {
         Auth::guard('procurement')->logout();
 
-        Session::invalidate();
-        Session::regenerateToken();
+        $request->session()->forget('procurement_session');
+
+        $request->session()->regenerateToken();
 
         return redirect('/');
     }

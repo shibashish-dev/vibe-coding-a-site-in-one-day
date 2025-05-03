@@ -21,12 +21,16 @@ class Sidebar extends Component
      */
     public function render(): View|Closure|string
     {
+        $procurementRoute = auth('procurement')->check()
+            ? route('procurement.dashboard')
+            : route('procurement.login');
+
         $menuItems = [
             ['name' => 'Zimbra', 'href' => '#zimbra', 'icon' => 'fa-solid fa-envelope'],
             ['name' => 'e-Office', 'href' => '#e-office', 'icon' => 'fa-solid fa-building'],
             ['name' => 'Integrated Info System', 'href' => '#iis', 'icon' => 'fa-solid fa-network-wired'],
             ['name' => 'Attendance', 'href' => '#attendance', 'icon' => 'fa-solid fa-user-check'],
-            ['name' => 'Procurement', 'href' => route('procurement.login'), 'icon' => 'fa-solid fa-shopping-cart'],
+            ['name' => 'Procurement', 'href' => $procurementRoute, 'icon' => 'fa-solid fa-shopping-cart'],
             ['name' => 'Forms & Formats', 'href' => route('forms.view'), 'icon' => 'fa-solid fa-file-contract'],
             ['name' => 'VMS', 'href' => '#vms', 'icon' => 'fa-solid fa-shield-alt'],
             ['name' => 'HIMS', 'href' => '#hims', 'icon' => 'fa-solid fa-hospital'],

@@ -8,7 +8,7 @@ use App\Livewire\Auth\Procurement\Login;
 use App\Livewire\Auth\Procurement\Register;
 use App\Models\ProcurementEntry;
 
-Route::prefix('procurement')->name('procurement.')->group(function () {
+Route::prefix('procurement')->name('procurement.')->middleware('procurement.session')->group(function () {
     Route::middleware('guest:procurement')->group(function () {
         Route::get('login', Login::class)->name('login');
         Route::get('register', Register::class)->name('register');
@@ -19,6 +19,8 @@ Route::prefix('procurement')->name('procurement.')->group(function () {
 
     Route::middleware('auth:procurement')->group(function () {
         Route::get('/dashboard', function () {
+            \Log::info('Procurement Dashboard: Web Auth', ['web' => Auth::guard('web')->check()]);
+            \Log::info('Procurement Dashboard: Procurement Auth', ['procurement' => Auth::guard('procurement')->check()]);
             $user = auth('procurement')->user();
 
             $entries = $user->role === 'procurement_admin'
