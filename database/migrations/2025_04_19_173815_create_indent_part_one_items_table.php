@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->text('description')->nullable();
             $table->string('quantity')->nullable();
             $table->string('unit')->nullable();
-            $table->decimal('estimated_cost', 15, 2)->nullable();
+            $table->string('estimated_cost', 15, 2)->nullable();
 
             $table->timestamps();
         });

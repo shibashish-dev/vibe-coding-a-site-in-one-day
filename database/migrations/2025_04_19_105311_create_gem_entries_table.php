@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('procurement_entry_id')->constrained()->onDelete('cascade');
             $table->string('section')->nullable();
             $table->string('indent_no')->nullable();
-            $table->date('date')->nullable();
+            $table->string('date')->nullable();
             $table->string('officer_name')->nullable();
             $table->string('designation')->nullable();
             $table->string('budget_head')->nullable();
@@ -26,14 +26,14 @@ return new class extends Migration {
             $table->string('gem_approval')->nullable();
 
             // Payment Approval
-            $table->date('gem_contract_date')->nullable();
-            $table->date('due_delivery_date')->nullable();
-            $table->date('receipt_date')->nullable();
+            $table->string('gem_contract_date')->nullable();
+            $table->string('due_delivery_date')->nullable();
+            $table->string('receipt_date')->nullable();
             $table->string('delivery_date_extension')->nullable();
             $table->boolean('with_ld')->default(false);
             $table->boolean('without_ld')->default(false);
             $table->text('delivery_extension_justification')->nullable();
-            $table->date('crac_date')->nullable();
+            $table->string('crac_date')->nullable();
             $table->text('inspection_remarks')->nullable();
             $table->text('other_remarks')->nullable();
             $table->string('pao_aao')->nullable();

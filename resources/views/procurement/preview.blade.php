@@ -24,16 +24,16 @@
                 border-color: #ddd !important;
             }
         }
-    
+
         body {
             background-color: #f9fafb;
         }
-    
+
         .form-section h2 {
             border-bottom: 2px solid #e5e7eb;
             padding-bottom: 0.25rem;
         }
-    
+
         .label-col {
             font-weight: 600;
             color: #374151;
@@ -53,9 +53,9 @@
         {{-- VEC Section --}}
         <div class="border border-gray-300 dark:border-zinc-700 rounded shadow bg-white dark:bg-zinc-900 p-8 mb-10">
             <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">1. VEC Form</h2>
-        
+
             <div class="space-y-6 text-sm text-gray-800 dark:text-gray-200">
-        
+
                 {{-- A & B --}}
                 @foreach ([
                     'description' => 'General Description of Item',
@@ -68,11 +68,11 @@
                         </div>
                     </div>
                 @endforeach
-        
+
                 {{-- C - Indented Items --}}
                 <div class="mt-6">
                     <h3 class="font-semibold mb-3 text-gray-800 dark:text-white">Description of Indented Material</h3>
-        
+
                     @if($entry->vec && $entry->vec->items->count())
                         <div class="overflow-x-auto">
                             <table class="w-full text-sm border border-gray-300 dark:border-zinc-700">
@@ -106,7 +106,7 @@
                         <p class="italic text-gray-500">No indented items listed.</p>
                     @endif
                 </div>
-        
+
                 {{-- D–M --}}
                 @foreach ([
                     'equipment_cost' => 'Cost of main equipment and year of purchase.',
@@ -136,12 +136,12 @@
             </div>
         </div>
 
-        
+
         <div class="border border-gray-300 dark:border-zinc-700 rounded shadow bg-white dark:bg-zinc-900 p-8 mb-10 page-break">
             <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">2. GEM Direct Purchase Form</h2>
-        
+
             <div class="space-y-6 text-sm text-gray-800 dark:text-gray-200">
-        
+
                 {{-- Basic Info --}}
                 @foreach ([
                     'section' => 'Section',
@@ -157,11 +157,11 @@
                         </div>
                     </div>
                 @endforeach
-        
+
                 {{-- Item List --}}
                 <div class="mt-6">
                     <h3 class="font-semibold mb-3 text-gray-800 dark:text-white">List of Items</h3>
-        
+
                     @if($entry->gem?->items && count($entry->gem->items))
                         <div class="overflow-x-auto">
                             <table class="w-full text-sm border border-gray-300 dark:border-zinc-700">
@@ -191,7 +191,7 @@
                         <p class="italic text-gray-500">No items listed.</p>
                     @endif
                 </div>
-        
+
                 {{-- Budget + Officials --}}
                 @foreach ([
                     'budget_head' => 'Budget Head',
@@ -208,10 +208,10 @@
                         </div>
                     </div>
                 @endforeach
-        
+
                 {{-- Approval for Payment --}}
                 <h3 class="text-lg font-semibold mt-8 mb-4 text-gray-800 dark:text-white">Approval for Payment</h3>
-        
+
                 @foreach ([
                     'gem_contract_date' => 'GeM Contract Date',
                     'due_delivery_date' => 'Due Date of Delivery',
@@ -230,7 +230,7 @@
                         </div>
                     </div>
                 @endforeach
-        
+
                 {{-- LD Checkboxes --}}
                 <div class="flex flex-col md:flex-row gap-4">
                     <div class="md:w-1/3 font-semibold">With LD:</div>
@@ -238,7 +238,7 @@
                         <input type="checkbox" disabled {{ $entry->gem?->with_ld ? 'checked' : '' }}>
                     </div>
                 </div>
-        
+
                 <div class="flex flex-col md:flex-row gap-4">
                     <div class="md:w-1/3 font-semibold">Without LD:</div>
                     <div class="md:w-2/3">
@@ -247,12 +247,12 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="border border-gray-300 dark:border-zinc-700 rounded shadow bg-white dark:bg-zinc-900 p-8 mb-10 page-break">
             <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">3. Indent Part-I</h2>
-        
+
             <div class="space-y-6 text-sm text-gray-800 dark:text-gray-200">
-        
+
                 {{-- Static Fields --}}
                 @foreach ([
                     'user_unit' => 'User Unit',
@@ -273,11 +273,11 @@
                         </div>
                     </div>
                 @endforeach
-        
+
                 {{-- Items --}}
                 <div class="mt-6">
                     <h3 class="text-lg font-semibold mb-3 text-gray-800 dark:text-white">Item Descriptions</h3>
-        
+
                     @if (!empty($entry->indentPartOne?->items))
                         <div class="overflow-x-auto">
                             <table class="w-full text-sm border border-gray-300 dark:border-zinc-700">
@@ -305,7 +305,7 @@
                         <p class="italic text-gray-500">No item descriptions available.</p>
                     @endif
                 </div>
-        
+
                 {{-- Financial Section --}}
                 @foreach ([
                     'total_estimated_cost_words' => 'Total Estimated Cost (in words)',
@@ -321,15 +321,15 @@
                         </div>
                     </div>
                 @endforeach
-        
+
             </div>
         </div>
 
         <div class="border border-gray-300 dark:border-zinc-700 rounded shadow bg-white dark:bg-zinc-900 p-8 mb-10 page-break">
             <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">4. Indent Part-II</h2>
-        
+
             <div class="space-y-6 text-sm text-gray-800 dark:text-gray-200">
-        
+
                 {{-- Cost Breakdown --}}
                 <div>
                     <h3 class="text-lg font-semibold mb-3">Cost Breakdown</h3>
@@ -353,7 +353,7 @@
                         </div>
                     @endforeach
                 </div>
-        
+
                 {{-- Categories --}}
                 <div>
                     <h3 class="text-lg font-semibold mb-3">Category Information</h3>
@@ -369,7 +369,7 @@
                         </div>
                     @endforeach
                 </div>
-        
+
                 {{-- Checkboxes --}}
                 <div>
                     <h3 class="text-lg font-semibold mb-3">Declarations</h3>
@@ -391,7 +391,7 @@
                         </div>
                     @endforeach
                 </div>
-        
+
                 {{-- Warranty & Training --}}
                 @foreach([
                     'warranty_period' => 'Warranty Period',
@@ -407,7 +407,7 @@
                         </div>
                     </div>
                 @endforeach
-        
+
                 {{-- Evaluation Criteria --}}
                 <div>
                     <h3 class="text-lg font-semibold mb-3">Evaluation & Procurement</h3>
@@ -426,7 +426,7 @@
                         </div>
                     @endforeach
                 </div>
-        
+
                 {{-- Other Inputs --}}
                 @foreach([
                     'gem_additional_parameters' => 'GEM Additional Parameters',
@@ -447,7 +447,7 @@
                         </div>
                     </div>
                 @endforeach
-        
+
                 {{-- Indenting & Approval --}}
                 <div>
                     <h3 class="text-lg font-semibold mt-6 mb-3">Officer Details</h3>
@@ -468,7 +468,7 @@
                         </div>
                     @endforeach
                 </div>
-        
+
                 {{-- GEM Report Link --}}
                 @if($entry->indentPartTwo?->gem_report_upload)
                     <div class="flex flex-col md:flex-row gap-4">
@@ -480,13 +480,13 @@
                         </div>
                     </div>
                 @endif
-        
+
             </div>
         </div>
 
         <div class="border border-gray-300 dark:border-zinc-700 rounded shadow bg-white dark:bg-zinc-900 p-8 mb-10 page-break">
             <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">5. Indent Part-III</h2>
-        
+
             <div class="space-y-6 text-sm text-gray-800 dark:text-gray-200">
                 @foreach([
                     'split_quantity' => 'Is Splitting of quantity required? If yes, indicate the ratio',
@@ -511,7 +511,7 @@
                         </div>
                     </div>
                 @endforeach
-        
+
                 {{-- Indenting Officer Section --}}
                 <div>
                     <h3 class="text-lg font-semibold mt-6 mb-3">Indenting Officer Details</h3>
@@ -531,7 +531,7 @@
                         @endforeach
                     </div>
                 </div>
-        
+
                 {{-- Approving Authority Section --}}
                 <div>
                     <h3 class="text-lg font-semibold mt-6 mb-3">Approving Authority Details</h3>
@@ -555,7 +555,7 @@
 
         <div class="border border-gray-300 dark:border-zinc-700 rounded shadow bg-white dark:bg-zinc-900 p-8 mb-10 page-break">
             <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white">6. PAC - Proprietary Article Certificate</h2>
-        
+
             <div class="space-y-6 text-sm text-gray-800 dark:text-gray-200">
                 {{-- Indent Details --}}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -571,7 +571,7 @@
                         </div>
                     @endforeach
                 </div>
-        
+
                 {{-- Manufacturer Details --}}
                 @foreach([
                     'manufacturer' => 'Manufacturer / Firm',
@@ -584,7 +584,7 @@
                         </div>
                     </div>
                 @endforeach
-        
+
                 {{-- Justification --}}
                 <div class="flex flex-col md:flex-row gap-4">
                     <div class="md:w-1/3 font-semibold">Justification (Why no other make/model is acceptable):</div>
@@ -592,7 +592,7 @@
                         {{ $entry->pac?->justification ?? '—' }}
                     </div>
                 </div>
-        
+
                 {{-- Indenting Officer Section --}}
                 <div>
                     <h3 class="text-lg font-semibold mt-6 mb-3">Indenting Officer Details</h3>
@@ -603,7 +603,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 {{-- Approving Authority Section --}}
                 <div>
                     <h3 class="text-lg font-semibold mt-6 mb-3">Approving Authority</h3>
@@ -616,13 +616,13 @@
                 </div>
             </div>
         </div>
-        
+
 
 
         {{-- Print Button --}}
         @if($entry->status != 'completed')
         <div class="flex justify-end pt-6 no-print">
-            <button type="button" onclick="initiatePrintFlow()" 
+            <button type="button" onclick="initiatePrintFlow()"
                 class="bg-green-700 text-white px-6 py-2 rounded hover:bg-green-800">
                 Save & Print
             </button>
@@ -631,12 +631,24 @@
                 @csrf
             </form>
         </div>
+        @elseif(Auth::user()->role == 'procurement_admin')
+        <div class="flex justify-end pt-6 no-print">
+            <button type="button" onclick="printPage()"
+                class="bg-green-700 text-white px-6 py-2 rounded hover:bg-green-800">
+                Print
+            </button>
+        </div>
         @endif
     </div>
     <script>
+
+        function printPage() {
+            window.print();
+        }
+
         function initiatePrintFlow() {
         window.print();
-        
+
             window.addEventListener('afterprint', function() {
                 Swal.fire({
                     title: 'Confirmation Required',
@@ -654,7 +666,7 @@
                         document.getElementById('submitForm').submit();
                     }
                 });
-            }, {once: true}); 
+            }, {once: true});
         }
     </script>
 </body>
