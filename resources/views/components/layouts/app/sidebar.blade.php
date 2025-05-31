@@ -56,6 +56,16 @@
                     <i class="fa-solid fa-utensils mr-2 text-gray-500"></i>
                     {{ __('Canteen Info') }}
                 </flux:navlist.item>
+                <flux:navlist.item :href="route('attendance.index')"
+                    :current="request()->routeIs('attendance.*')" wire:navigate>
+                    <i class="fa-solid fa-clipboard-user mr-2 text-gray-500"></i>
+                    {{ __('Attendance') }}
+                </flux:navlist.item>
+                <flux:navlist.item :href="route('employee.index')"
+                    :current="request()->routeIs('emplyee.*')" wire:navigate>
+                    <i class="fa-solid fa-clipboard-user mr-2 text-gray-500"></i>
+                    {{ __('Employees') }}
+                </flux:navlist.item>
 
             </flux:navlist.group>
         </flux:navlist>

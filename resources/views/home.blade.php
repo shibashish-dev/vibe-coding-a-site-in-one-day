@@ -1,11 +1,13 @@
 <x-frontend>
+@push('styles')
+
 
     <style>
         .main-container {
             display: flex;
             align-items: center;
             width: 100%;
-            max-width: 1900px;
+            max-width: 1950px;
             margin: 30px auto;
             padding: 0 16px;
         }
@@ -13,7 +15,7 @@
         .main-grid {
             display: grid;
             grid-template-columns: minmax(200px, 240px) 1fr minmax(200px, 350px);
-            gap: 24px;
+            gap: 10px;
             align-items: start;
         }
 
@@ -112,6 +114,8 @@
             }
         }
     </style>
+
+@endpush
 
     <div class="main-container my-5">
         <div class="main-grid">

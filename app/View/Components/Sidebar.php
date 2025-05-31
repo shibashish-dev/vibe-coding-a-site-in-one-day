@@ -29,7 +29,7 @@ class Sidebar extends Component
             ['name' => 'Zimbra', 'href' => '#zimbra', 'icon' => 'fa-solid fa-envelope'],
             ['name' => 'e-Office', 'href' => '#e-office', 'icon' => 'fa-solid fa-building'],
             ['name' => 'Integrated Info System', 'href' => '#iis', 'icon' => 'fa-solid fa-network-wired'],
-            ['name' => 'Attendance', 'href' => '#attendance', 'icon' => 'fa-solid fa-user-check'],
+            ['name' => 'Attendance', 'href' => route('attendance.show'), 'icon' => 'fa-solid fa-user-check'],
             ['name' => 'Procurement', 'href' => $procurementRoute, 'icon' => 'fa-solid fa-shopping-cart'],
             ['name' => 'Forms & Formats', 'href' => route('forms.view'), 'icon' => 'fa-solid fa-file-contract'],
             ['name' => 'VMS', 'href' => '#vms', 'icon' => 'fa-solid fa-shield-alt'],
@@ -37,6 +37,8 @@ class Sidebar extends Component
             ['name' => 'Photo Gallery', 'href' => route('gallery.view'), 'icon' => 'fa-solid fa-images'],
             ['name' => 'Canteen Info', 'href' => route('canteen.view'), 'icon' => 'fa-solid fa-utensils'],
             ['name' => 'Vehicle', 'href' => '#vehicle', 'icon' => 'fa-solid fa-car'],
+            ['name' => 'My Space', 'href' => '#vehicle', 'icon' => 'fa-solid fa-user-astronaut'],
+            ['name' => 'Employee Directory', 'href' => '#vehicle', 'icon' => 'fa-solid fa-address-book'],
         ];
 
         $links = [

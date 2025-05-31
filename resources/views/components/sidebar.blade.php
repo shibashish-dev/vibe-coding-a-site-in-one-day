@@ -1,23 +1,25 @@
-<style>
-    .sidebar {
-    position: sticky;
-    top: 16px;
-    height: auto !important;
-}
+@push('styles')
+    <style>
+        .sidebar {
+            position: sticky;
+            top: 16px;
+            height: auto !important;
+        }
 
-/* Responsive behavior for Sidebar */
-@media (max-width: 1024px) {
-    .sidebar {
-        position: static;
-        width: 100%;
-        height: 840px;
-        margin-top: 24px;
-    }
-}
+        /* Responsive behavior for Sidebar */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: 840px;
+                margin-top: 24px;
+            }
+        }
+    </style>
 
-</style>
+@endpush
 <div
-    class="lg:!h-[820px] no-scrollbar  text-xs lg:text-sm sidebar no-scrollbar  bg-white/30 backdrop-blur-xl shadow-2xl p-4 lg:p-5 rounded-2xl border border-white/20 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent ">
+    class="lg:!h-[840px] no-scrollbar  text-xs lg:text-sm sidebar no-scrollbar  bg-white/30 backdrop-blur-xl shadow-2xl p-4 lg:p-5 rounded-2xl border border-white/20 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-transparent ">
 
     <!-- Menu Section -->
     <aside class="mb-6">
@@ -59,39 +61,40 @@
         </ul>
     </aside>
 </div>
+@push('scripts')
 
-<!-- Sidebar Script -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Menu Dropdown Toggle
-        const menuToggle = document.getElementById('menu-dropdown-toggle');
-        const menuDropdown = document.getElementById('menu-dropdown');
-        const menuChevron = menuToggle.querySelector('.fa-chevron-down');
+    <!-- Sidebar Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Menu Dropdown Toggle
+            const menuToggle = document.getElementById('menu-dropdown-toggle');
+            const menuDropdown = document.getElementById('menu-dropdown');
+            const menuChevron = menuToggle.querySelector('.fa-chevron-down');
 
-        menuToggle.addEventListener('click', function () {
-            if (window.innerWidth < 768) { // Only toggle on mobile
-                menuDropdown.classList.toggle('hidden');
-                menuChevron.classList.toggle('rotate-180');
-            }
-        });
+            menuToggle.addEventListener('click', function () {
+                if (window.innerWidth < 768) { // Only toggle on mobile
+                    menuDropdown.classList.toggle('hidden');
+                    menuChevron.classList.toggle('rotate-180');
+                }
+            });
 
-        // Links Dropdown Toggle
-        const linksToggle = document.getElementById('links-dropdown-toggle');
-        const linksDropdown = document.getElementById('links-dropdown');
-        const linksChevron = linksToggle.querySelector('.fa-chevron-down');
+            // Links Dropdown Toggle
+            const linksToggle = document.getElementById('links-dropdown-toggle');
+            const linksDropdown = document.getElementById('links-dropdown');
+            const linksChevron = linksToggle.querySelector('.fa-chevron-down');
 
-        linksToggle.addEventListener('click', function () {
+            linksToggle.addEventListener('click', function () {
+                if (window.innerWidth < 768) {
+                    linksDropdown.classList.toggle('hidden');
+                    linksChevron.classList.toggle('rotate-180');
+                }
+            });
+
+            // Ensure dropdowns are closed on mobile by default
             if (window.innerWidth < 768) {
-                linksDropdown.classList.toggle('hidden');
-                linksChevron.classList.toggle('rotate-180');
+                menuDropdown.classList.add('hidden');
+                linksDropdown.classList.add('hidden');
             }
         });
-
-        // Ensure dropdowns are closed on mobile by default
-        if (window.innerWidth < 768) {
-            menuDropdown.classList.add('hidden');
-            linksDropdown.classList.add('hidden');
-        }
-    });
-</script>
-
+    </script>
+@endpush

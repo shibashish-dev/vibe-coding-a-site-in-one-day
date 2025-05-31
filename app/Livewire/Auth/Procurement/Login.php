@@ -22,6 +22,12 @@ class Login extends Component
     public string $password = '';
 
     public bool $remember = false;
+    public function mount(): void
+    {
+        if (Auth::guard('procurement')->check()) {
+            $this->redirect(route('procurement.dashboard'), navigate: true);
+        }
+    }
 
     public function login(): void
     {

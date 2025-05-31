@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('gem_id')->nullable();
             $table->integer('quantity')->nullable();
             $table->string('unit')->nullable();
-            $table->decimal('amount', 12, 2)->nullable();
+            $table->string('amount')->nullable();
             $table->timestamps();
         });
     }
@@ -30,3 +30,4 @@ return new class extends Migration {
         Schema::dropIfExists('gem_items');
     }
 };
+

@@ -52,15 +52,18 @@
     </div>
 </flux:navbar>
 
+@push('scripts')
 
-<!-- Toggle Script -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const toggle = document.getElementById('menu-toggle');
-        const menu = document.getElementById('menu');
+    <!-- Toggle Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('menu');
 
-        toggle.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+            toggle.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
         });
-    });
-</script>
+    </script>
+
+@endpush

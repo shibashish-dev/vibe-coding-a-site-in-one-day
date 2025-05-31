@@ -5,11 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heavy Water Board</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/swiper-bundle.min.css') }}" />
     @vite('resources/css/app.css')
+    @stack('styles')
 </head>
 
 <body class="bg-gray-100">
@@ -81,9 +80,8 @@
         <p class="text-sm lg:text-base px-4">Mandate of HWB is managing the projects of the Department of Atomic Energy
             for the production of Heavy Water and Specialty Materials.</p>
     </footer>
-
     <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{{ asset('js/swiper-bundle.min.js') }}"></script>
 
     <script>
         function setFontSize(size) {
@@ -114,6 +112,7 @@
     </script>
 
     @fluxScripts
+    @stack('scripts')
 </body>
 
 </html>

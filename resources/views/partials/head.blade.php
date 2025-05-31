@@ -5,11 +5,8 @@
 
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-{{--
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
+<script src="{{ asset('js/chart.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
 
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @fluxAppearance
